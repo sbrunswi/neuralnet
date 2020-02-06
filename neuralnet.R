@@ -8,8 +8,21 @@ df=data.frame(TKS,CSS,Placed)
 # load library
 require(neuralnet)
 
-# fit neural network
+# fit neural network with 3 layers
 nn=neuralnet(Placed~TKS+CSS,data=df, hidden=3,act.fct = "logistic",
                 linear.output = FALSE)
 # plot neural network
 plot(nn)
+# fit neural network with 1 layers
+nn2=neuralnet(Placed~TKS+CSS,data=df, hidden=1,act.fct = "logistic",
+             linear.output = FALSE)
+plot (nn2)
+nn2
+##predict it now
+TKS=c(0,20,50)
+CSS=c(20,50,90)
+test=data.frame(TKS,CSS)
+predict=compute(nn,test)
+predict$net.result
+help("neuralnet")
+?neuralnet
